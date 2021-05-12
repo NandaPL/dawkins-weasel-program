@@ -3,7 +3,7 @@ import java.util.Random;
 public class Evolucao {
     static final String alvo = "METHINKS IT IS LIKE A WEASEL";
     static final char[] possibilidades = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ".toCharArray();
-    static double minimoMutacoes = 0.05;
+    static double mutacoes = 0.05;
     static int apitidaoPerfeita = alvo.length();
     private static String mutante;
     static Random rand = new Random();
@@ -21,15 +21,14 @@ public class Evolucao {
     }
 
     /**
-     * Cálculo da diferença de caracteres entre a string alvo e a string mutadora.
+     * Cálculo da diferença de caracteres entre a string alvo e a string copia.
      *
-     * Quanto menor o valor da taxa (sua porcentagem) de mutação da string mutante,
-     * mais proximo estou da string alvo.
+     * Quanto maior o valorde comparação, mais proximo a string está do alvo.
      * */
-    public int comparacaoStrings(String mutadora){
+    public int comparacaoStrings(String copia){
         int valorComparacao = 0;
-        for(int i = 0;i < mutadora.length(); i++){
-            if (mutadora.charAt(i) == alvo.charAt(i)) valorComparacao++;
+        for(int i = 0; i < copia.length(); i++){
+            if (copia.charAt(i) == alvo.charAt(i)) valorComparacao++;
         }
         return valorComparacao;
     }
@@ -37,16 +36,16 @@ public class Evolucao {
     /**
      * Cálculo da taxa de mutaçõs.
      *
-     *Quanto menor for a taxa de mutação mais próximo
+     *Quanto menor for a taxa de mutação mais próximo ele está da string alvo.
      * */
     public double taxaDeMutacoes(){
-        return (((double) apitidaoPerfeita - comparacaoStrings(mutante)) / apitidaoPerfeita * (1 - minimoMutacoes));
+        return (((double) apitidaoPerfeita - comparacaoStrings(mutante)) / apitidaoPerfeita * (1 - mutacoes));
     }
 
     /**
      * Realização da mutação da string.
      *
-     * Para cada char da string, caso o valor double gerado for menor ou igual a taxa de mutação obtida,
+     * Para cada char da string, caso o valor double gerado for menor ou igual a taxa de mutação,
      * a string de rotorno recebe um caracter aleatório entre as minhas
      * possibilidades. Caso não ela recebe o caractere naquele indice
      * */

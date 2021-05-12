@@ -4,7 +4,7 @@ public class Main {
 
         //Criação de uma string inicial aleatoria (28 caracteres)
         evolucao.setMutante(evolucao.mutacao(evolucao.getAlvo(), 1));
-        int iteracao = 0;
+        int iteracao = 1;
         int melhorPontuacao = 0;
 
         //Enquanto a melhor pontuação não for atingida
@@ -12,7 +12,7 @@ public class Main {
             double taxaMutacoes = evolucao.taxaDeMutacoes();
 
             System.out.println(iteracao +": " + evolucao.getMutante() + ", pontos: " +
-                    evolucao.comparacaoStrings(evolucao.getMutante()) + ", taxaMutacoes: " + taxaMutacoes);
+                    evolucao.comparacaoStrings(evolucao.getMutante()));
 
             String melhorString = null;
 
@@ -20,7 +20,7 @@ public class Main {
             for(int i = 0; i < 100; i++){
                 String copia = evolucao.mutacao(evolucao.getMutante(), taxaMutacoes);
 
-                //Resultado obtido da comparação entre as strings (quantidade de letras diferentes)
+                //Resultado obtido da comparação entre as strings
                 int pontos = evolucao.comparacaoStrings(copia);
 
                 //Melhor sentença é atualizada com base na pontuação obtida
@@ -41,7 +41,7 @@ public class Main {
             }
             iteracao++;
         }
-        System.out.println(evolucao.getMutante() + ", " + iteracao);
+        System.out.println(evolucao.getMutante() + ", geração: " + iteracao + ", pontos: " +
+                evolucao.comparacaoStrings(evolucao.getMutante()));
     }
 }
-
